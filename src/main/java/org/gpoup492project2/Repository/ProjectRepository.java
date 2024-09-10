@@ -1,4 +1,4 @@
-package org.gpoup492project2;
+package org.gpoup492project2.Repository;
 
 import org.gpoup492project2.entity.Project;
 
