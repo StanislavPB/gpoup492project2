@@ -1,7 +1,8 @@
 package org.gpoup492project2.services;
 
-import aMainProject.entity.User;
-import aMainProject.repositories.UserRepository;
+
+import org.gpoup492project2.Repository.UserRepository;
+import org.gpoup492project2.entity.User;
 
 public class UserService {
     private UserRepository userRepository;

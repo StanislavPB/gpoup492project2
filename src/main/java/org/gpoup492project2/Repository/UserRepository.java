@@ -1,12 +1,13 @@
 package org.gpoup492project2.Repository;
 
+
 import org.gpoup492project2.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserRepository {
-    private Map<String, User> userMap = new HashMap<>();
+    private Map<Integer, User> userMap = new HashMap<>();
 
 
     public void addUser(User user) {
@@ -25,7 +26,7 @@ public class UserRepository {
         userMap.remove(id);
     }
 
-    public Map<String, User> getAllUsers() {
+    public Map<Integer, User> getAllUsers() {
         return userMap;
     }
 }

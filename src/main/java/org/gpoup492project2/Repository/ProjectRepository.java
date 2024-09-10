@@ -5,7 +5,7 @@ import org.gpoup492project2.entity.Project;
 import java.util.HashMap;
 import java.util.Map;
 
-class ProjectRepository {
+public class ProjectRepository {
     private Map<String, Project> projectMap = new HashMap<>();
 
     public void addProject(Project project) {

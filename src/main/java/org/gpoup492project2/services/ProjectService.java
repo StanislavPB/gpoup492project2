@@ -1,7 +1,7 @@
 package org.gpoup492project2.services;
 
-import aMainProject.entity.Project;
-import aMainProject.repositories.ProjectRepository;
+import org.gpoup492project2.Repository.ProjectRepository;
+import org.gpoup492project2.entity.Project;
 
 public class ProjectService {
     private ProjectRepository projectRepository;

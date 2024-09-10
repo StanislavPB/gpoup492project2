@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-class TaskRepository {
+public class TaskRepository {
     private Map<String, Task> taskStorage = new HashMap<>();
 
     public void addTask(Task task) {

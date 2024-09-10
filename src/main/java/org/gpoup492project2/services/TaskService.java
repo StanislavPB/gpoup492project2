@@ -1,7 +1,7 @@
 package org.gpoup492project2.services;
 
-import aMainProject.entity.Task;
-import aMainProject.repositories.TaskRepository;
+import org.gpoup492project2.Repository.TaskRepository;
+import org.gpoup492project2.entity.Task;
 
 import java.util.List;
 
