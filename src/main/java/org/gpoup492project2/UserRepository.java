@@ -1,5 +1,7 @@
 package org.gpoup492project2;
 
+import org.gpoup492project2.entity.User;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -30,7 +30,7 @@
 - Используется для корректного функционирования хэш-таблиц и других коллекций.
 */
 
-package org.gpoup492project2;
+package org.gpoup492project2.entity;
 
 import java.time.LocalDate;
 import java.util.Objects;

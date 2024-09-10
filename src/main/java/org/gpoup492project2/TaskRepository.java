@@ -1,5 +1,7 @@
 package org.gpoup492project2;
 
+import org.gpoup492project2.entity.Task;
+
 class TaskRepository {
     private Map<String, Task> taskStorage = new HashMap<>();
 

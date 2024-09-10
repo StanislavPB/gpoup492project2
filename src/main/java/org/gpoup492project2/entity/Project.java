@@ -24,7 +24,7 @@ Cohort49-2
 и методы toString(), equals(), и hashCode().
 */
 
-package org.gpoup492project2;
+package org.gpoup492project2.entity;
 
 import java.util.List;
 import java.time.LocalDate;
