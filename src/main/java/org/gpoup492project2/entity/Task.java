@@ -142,7 +142,7 @@ public class Task {
                     '}';
         }
 
-        //Сравнивает текущий объект  Task с другим объектом Task.
+        //Сравнивает текущий объект Task с другим объектом Task.
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;

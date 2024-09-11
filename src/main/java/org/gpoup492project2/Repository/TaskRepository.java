@@ -21,16 +21,16 @@ public class TaskRepository {
     }
 
     // Метод для обновления задачи
-    public void updateTask(Task updateTask) {
-        taskStorage.put(updateTask.getId(), updateTask);
+    public void updateTask(Task taskToUpdate) {
+        taskStorage.put(taskToUpdate.getId(), taskToUpdate);
     }
 
     // Метод для удаления задачи
-    public void deleteTask(String id) {
-        taskStorage.remove(id);
+    public void deleteTask(String taskId) {
+        taskStorage.remove(taskId);
     }
 
-    // Метод для для получения списка всех задач
+    // Метод для получения списка всех задач
     public List<Task> getAllTasks() {
         return new ArrayList<>(taskStorage.values());
     }

@@ -15,7 +15,7 @@ public class TaskService {
     }
 
     public void createTask(String id, String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor){
-        Task task = new Task(id, title, description, created, deadline, priority, status, executor);
+        Task task = new Task(id, title, description,created, deadline, priority, status, executor);
         taskRepository.addTask(task);
         System.out.println("Задача " + title + " создана.");
     }
@@ -31,7 +31,7 @@ public class TaskService {
     public void deleteTask(String taskToDelete){
         taskRepository.deleteTask(taskToDelete);
     }
-
+    //
     public List<Task> getAllTasks(){
         return taskRepository.getAllTasks();
     }
