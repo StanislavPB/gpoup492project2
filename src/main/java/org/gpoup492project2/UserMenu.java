@@ -44,13 +44,13 @@ public class UserMenu {
                             setUserService();
                             break;
                         case 3:
-                            //findByTitle();
+                            //();
                             break;
                         case 4:
-                            //findBooksByAuthor();
+                            //();
                             break;
                         case 5:
-                            //findMagazineByIssueNumber();
+                            //();
                             break;
                         case 6:
                             System.out.println("Выход из программы.");
@@ -75,44 +75,6 @@ public class UserMenu {
                 User user = new User();
                 userService.createUser(new User(id, name, surname, login, password));
             }
-
-            /* private void findByTitle() {
-                String title = userInput.inputText("Введите название для поиска: ");
-                Book book = bookService.findBookByTitle(title);
-                Magazine magazine = magazineService.findMagazineByTitle(title);
-                if (book != null) {
-                    book.printBook();
-                } else if (magazine != null) {
-                    magazine.printMagazine();
-                } else {
-                    System.out.println("Такое название не найдено.");
-                }
-            }
-
-            private void findBooksByAuthor() {
-                String author = userInput.inputText("Введите автора для поиска книг: ");
-                Book[] books = bookService.findBooksByAuthor(author);
-                if (books.length > 0) {
-                    for (Book book : books) {
-                        book.printBook();
-                    }
-                } else {
-                    System.out.println("Книги не найдены.");
-                }
-            }
-
-            private void findMagazineByIssueNumber() {
-                String issueNumber = userInput.inputText("Введите номер выпуска журнала для поиска: ");
-                Magazine magazine = magazineService.findMagazineByIssueNumber(issueNumber);
-                if (magazine != null) {
-                    magazine.printMagazine();
-                } else {
-                    System.out.println("Журнал не найден.");
-                }
-            }
-
-            */
-
         }
 
     }
