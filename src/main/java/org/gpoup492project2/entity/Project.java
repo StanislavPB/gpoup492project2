@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+  Автор Vladimir Romaikin
+  Cohort49-2
+
   Класс Project представляет проект в системе управления проектами.
   Этот класс хранит информацию о проекте, его характеристиках, а также предоставляет методы для управления задачами в проекте.
 
@@ -71,18 +74,6 @@ public class Project {
         this.status = status;
         this.executor = executor;
         this.tasks = new ArrayList<>(); // Инициализация списка задач
-    }
-
-    // Метод для добавления задачи в проект
-    public void addTask(Task task) {
-        if (task != null) {
-            tasks.add(task);
-        }
-    }
-
-    // Метод для удаления задачи из проекта
-    public void removeTask(Task task) {
-        tasks.remove(task);
     }
 
     // Геттеры для доступа к полям проекта
