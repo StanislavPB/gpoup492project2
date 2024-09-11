@@ -28,9 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.refList;
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.title;
-
   public class ProjectService {
 
     // Репозиторий для работы с проектами
