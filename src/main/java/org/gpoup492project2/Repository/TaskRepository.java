@@ -15,18 +15,22 @@ public class TaskRepository {
         taskStorage.put(task.getId(), task);
     }
 
+    // Метод для добавления задачи
     public Task getTaskById(String id) {
         return taskStorage.get(id);
     }
 
+    // Метод для обновления задачи
     public void updateTask(Task updateTask) {
         taskStorage.put(updateTask.getId(), updateTask);
     }
 
+    // Метод для удаления задачи
     public void deleteTask(String id) {
         taskStorage.remove(id);
     }
 
+    // Метод для для получения списка всех задач
     public List<Task> getAllTasks() {
         return new ArrayList<>(taskStorage.values());
     }
