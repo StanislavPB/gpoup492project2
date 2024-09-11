@@ -1,4 +1,4 @@
-/*
+/**
  Автор Vladimir Romaikin
  Сohort49-2
 

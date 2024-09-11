@@ -24,7 +24,9 @@ package org.gpoup492project2.services;
 import org.gpoup492project2.Repository.ProjectRepository;
 import org.gpoup492project2.entity.Project;
 
-public class ProjectService {
+import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.title;
+
+  public class ProjectService {
 
     // Репозиторий для работы с проектами
     private ProjectRepository projectRepository;
@@ -34,16 +36,11 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    // Метод для создания проекта
-    public boolean createProject(Project project) {
-        // Логика проверки на дубликат проекта по ID
-        if (projectRepository.getProjectById(project.getId()).existsProjectById()) {
-            return false; // Проект с таким ID уже существует
-        }
-        projectRepository.addProject(project); // Добавление проекта в репозиторий
-        return true;
-    }
 
-        // Метод для поиска проекта по id
+
+    // Метод для создания проекта
+
+
+    // Метод для поиска проекта по id
 
 }
