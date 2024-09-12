@@ -1,11 +1,13 @@
 package org.gpoup492project2.services;
 
 import org.gpoup492project2.Repository.TaskRepository;
+import org.gpoup492project2.dto.TaskDto;
 import org.gpoup492project2.entity.Task;
-import org.gpoup492project2.entity.User;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TaskService {
     private TaskRepository taskRepository;
@@ -14,29 +16,76 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void createTask(String id, String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor){
-        Task task = new Task(id, title, description,created, deadline, priority, status, executor);
+    public String createTask(TaskDto taskDto){
+
+        // Валидируем входные данные
+        if (!validateTaskDto(taskDto)) {
+            return "Некорректные данные для создания задачи.";
+        }
+
+        // Проверяем, существует ли задача с таким ID
+        if (!taskRepository.existsTaskById(taskDto.getTitle())) {
+            return "Проект с названием " + taskDto.getTitle() + " уже существует.";
+        }
+
+        // Преобразуем DTO в объект Task
+        Task task = taskDto.toTask();
         taskRepository.addTask(task);
-        System.out.println("Задача " + title + " создана.");
+        return "Задача " + task.getTitle() + " создана.";
     }
 
-    public Task getTaskById(String id){
-        return taskRepository.getTaskById(id);
+    // Метод для получения задачи по ID
+    public Optional<Boolean> getTaskById(String idTask){
+        boolean task = taskRepository.existsTaskById(idTask);
+        return Optional.ofNullable(task);
     }
 
-    public void updateTask(Task taskToUpdate){
-        taskRepository.updateTask(taskToUpdate);
+    // Метод для обновления задачи
+    public String updateTask(TaskDto taskDto){
+        // Валидируем входные данные
+        if (!validateTaskDto(taskDto)){
+            return "Некорректные данные для обновления задачи.";
+        }
+        // Проверяем, существует ли задача с таким ID
+        if (!taskRepository.existsTaskById(String.valueOf(taskDto.toTask().getId()))){
+            return "Задача с ID " + taskDto.toTask().getId();
+        }
+
+        // Преобразуем DTO в объект Task
+        Task task = taskDto.toTask();
+        taskRepository.updateTask(task);
+        return "Задача " + task.getTitle() + " Обновлена";
     }
 
-    public void deleteTask(String taskToDelete){
+    // Метод для удаления задачи
+    public String deleteTask(String taskToDelete){
+        if (!taskRepository.existsTaskById(taskToDelete)){
+            return "Задача с ID " + taskToDelete + " не найдена.";
+        }
         taskRepository.deleteTask(taskToDelete);
+        return "Задача с ID " + taskToDelete + " удалена.";
     }
-    //
-    public List<Task> getAllTasks(){
+    // Метод для получения всех задач
+    public Map<String, Task> getAllTasks(){
         return taskRepository.getAllTasks();
     }
 
-    public List<Task> tasksByStatus(String status){
-        return taskRepository.getTasksByStatus(status);
+    // Метод для поиска задачи по названию
+    public Optional<Task> findTaskByName(String name){
+        List<Task> tasks = taskRepository.getAllTasks().values().stream()
+                .filter(task -> task.getTitle().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
+        return tasks.isEmpty() ? Optional.empty() : Optional.of(tasks.get(0));
+    }
+
+    // Метод для валидации данных задачи
+    private boolean validateTaskDto(TaskDto taskDto) {
+        return taskDto.getTitle() != null && !taskDto.getTitle().isEmpty() &&
+                taskDto.getDescription() != null &&
+                taskDto.getCreated() != null &&
+                taskDto.getDeadline() != null &&
+                taskDto.getPriority() != null &&
+                taskDto.getStatus() != null &&
+                taskDto.getExecutor() != null;
     }
 }
