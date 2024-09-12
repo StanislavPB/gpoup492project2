@@ -1,11 +1,15 @@
 package org.gpoup492project2;
 
+import org.gpoup492project2.dto.ProjectDto;
 import org.gpoup492project2.entity.Project;
+import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.entity.User;
 import org.gpoup492project2.services.ProjectService;
 import org.gpoup492project2.services.TaskService;
 import org.gpoup492project2.services.UserInput;
 import org.gpoup492project2.services.UserService;
+
+import java.util.Map;
 
 public class UserMenu {
           private ProjectService projectService;
@@ -35,24 +39,45 @@ public class UserMenu {
                     System.out.println("3.3.5 Изменить статус задачи");
                     System.out.println("3.4 Удалить задачу");
 
-
                     int userChoose = userInput.inputInt("Выберите пункт меню: ");
-
 
                     switch (userChoose) {
                         case 1:
-                            Project newProject = projectService.createProject();
+                            //String nameNewProject = userInput.inputText("Введите название проекта: ");
+                           // String descriptionNewProject = userInput.inputText("Введите описание проекта: ");
+                            Project newProject = projectService.createProject(ProjectDto projectDto);
+                            if (newProject != null){
+                                System.out.println("Успешно добавлен новый проект.");
+                                System.out.println(newProject);
+                            } else {
+                                System.out.println("Проект добавить не удалось.");
+                            }
                             break;
                         case 2:
+                            Project[] allProjects = projectService.getAllProjects();
+                            int projectCounter = 0;
+                            for (int i = 0; i < allProjects.length; i++) {
+                                if (allProjects[i] != null){
+                                    System.out.println("Проект " + allProjects[i].getId() + " название: " + allProjects[i].getTitle());
+                                    projectCounter++;
+                                }
+                            }
+                            if (projectCounter == 0){
+                                System.out.println("Проект не найден.");
+                            }
                             break;
                         case 3:
-                            //();
+                            Project[] choosenProject = allProjects[].getId();
+                            System.out.println("Управление проектом. Информация о проекте.");
+                            System.out.println(choosenProject);
                             break;
                         case 4:
-                            //();
+                            Task newTask = projectService.addTaskToProject();
+                           // String newTask = userInput.inputText("Введите название задачи: ");
+                            System.out.println("Задача добавлена" + newTask);
                             break;
                         case 5:
-                            //();
+                            System.out.println("Редактировать задачу");
                             break;
                         case 6:
                             System.out.println("Выход из программы.");
@@ -62,20 +87,4 @@ public class UserMenu {
                     }
                 }
             }
-
-           /*public void setProjectService() {
-                String title = userInput.inputText("Введите название проекта: ");
-                String description = userInput.inputText("Введите описание проекта: ");
-                String priority = userInput.inputText("Введите приротет проекта: ");
-                String executor = userInput.inputText("Введите ответственного: ");
-                projectService.createProject(new Project(title,description,priority,executor));
-            }
-
-            private void setUserService() {
-                String name = userInput.inputText("Введите ваше имя: ");
-                String surname = userInput.inputText("Введите вашу фамилию: ");
-                User user = new User();
-                userService.createUser(new User(id, name, surname, login, password));
-            }
-            */
         }
