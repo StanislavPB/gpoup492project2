@@ -66,31 +66,81 @@ public class UserMenu {
                                 System.out.println("Проект не найден.");
                             }
                             break;
+
                         case 3:
-                            Project[] choosenProject = allProjects[].getId();
-                            System.out.println("Управление проектом. Информация о проекте.");
-                            System.out.println(choosenProject);
+                            System.out.println("3.1 Просмотреть информацию о проекте");
+                            System.out.println("3.2 Добавить задачу");
+                            System.out.println("3.3 Редактировать задачу");
+                            System.out.println("3.4 Удалить задачу");
+                            System.out.println("3.5 Изменить информацию о проекте");
+                            System.out.println("3.6 Назначить ответственного за проект");
+
+                            int subChoose = userInput.inputInt("Выберите пункт подменю: ");
+
+                            switch (subChoose) {
+                                case 1:
+                                    String projectId = userInput.inputText("Введите id проекта: ");
+                                    Project project = projectService.getProjectById(projectId);
+                                    if (project != null) {
+                                        System.out.println("Информация о проекте: " + project);
+                                    } else {
+                                        System.out.println("Проект не найден");
+                                    }
+                                    break;
+                                case 2:
+                                    String taskProjectId = userInput.inputText("Введите id проекта для добавления задачи: ");
+                                    String newTaskTitle = userInput.inputText("Введите название задачи: ");
+                                    Task newTask = projectService.addTaskToProject(taskProjectId, newTaskTitle);
+                                    if (newTask != null) {
+                                        System.out.println("Задача добавлена" + newTask);
+                                    } else {
+                                        System.out.println("Не удалось добавить задачу");
+                                    }
+                                    break;
+                                case 3:
+                                    String taskIdToUpdate = userInput.inputText("Введите id задачи для редактирования: ");
+                                    Task updatedTask = taskService.updateTask(taskIdToUpdate);
+                                    if (updatedTask != null) {
+                                        System.out.println("Задача отредактирована " + updatedTask);
+                                    } else {
+                                        System.out.println("Не удалось отредактировать задачу");
+                                    }
+                                    break;
+                                case 4:
+                                    String taskIdToDelete = userInput.inputText("Введите id задачи для удаления: ");
+                                    boolean removeTask = taskService.deleteTask(taskIdToDelete);
+                                    if (removeTask) {
+                                        System.out.println("Задача удалена");
+                                    } else {
+                                        System.out.println("Не удалось удалить задачу");
+                                    }
+                                    break;
+                                case 5:
+                                    String projectIdToUpdate = userInput.inputText("Введите id проекта для редактирования: ");
+                                    Project updateProject = projectService.updateProject(projectIdToUpdate);
+                                    if (updateProject != null) {
+                                        System.out.println("Проект обновлен " + updateProject);
+                                    } else {
+                                        System.out.println("Не удалось изменить информацию о проекте");
+                                    }
+                                    break;
+                                case 6:
+                                    String projectIdForExecutor = userInput.inputText("Введите id проекта для назначения ответственного: ");
+                                    String userId = userInput.inputText("Введите id пользователя для назначения: ");
+                                    User executorForProject = userService.getUserById(userId);
+                                    if (executorForProject != null) {
+                                        System.out.println("Ответственный назначен");
+                                    } else {
+                                        System.out.println("Ответственного назначить не удалось");
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("Неверный пункт подменю. Пожалуйста, попробуйте снова.");
+                            }
                             break;
                         case 4:
-                            Task newTask = projectService.addTaskToProject();
-                           // String newTask = userInput.inputText("Введите название задачи: ");
-                            System.out.println("Задача добавлена" + newTask);
-                            break;
-                        case 5:
-                            Task updateTask = taskService.updateTask();
-                            System.out.println("Редактировать задачу");
-                            break;
-                        case 6:
-                            Task removeTask = taskService.deleteTask();
-                            System.out.println("Удалить задачу");
-                            break;
-                        case 7:
-                            Project updateProject = projectService.updateProject();
-                            System.out.println("Изменить информацию о проекте");
-                            break;
-                        case 8:
-                            System.out.println("Назначить ответственного за проект");
-                            break;
+                            System.out.println("Выход из программы.");
+                            return;
                         default:
                             System.out.println("Неверный пункт меню. Пожалуйста, попробуйте снова.");
                     }
