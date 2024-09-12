@@ -114,6 +114,12 @@ public class Project {
     }
 
     // Сеттеры для обновления данных проекта
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

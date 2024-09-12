@@ -8,8 +8,14 @@ import java.util.Map;
 public class ProjectRepository {
     private Map<String, Project> projectMap = new HashMap<>();
 
-    public void addProject(Project project) {
-        projectMap.put(project.getId(), project);
+    private Integer idCounter = 0;
+
+
+    public String addProject(Project project) {
+        idCounter++; // увеличиваем счетчик проектов
+        project.setId(idCounter.toString());// Устанавливаем ID в объекте Project
+        projectMap.put(idCounter.toString(), project); // положили проект в коллекцию
+        return idCounter.toString(); // вернули номер проекта
     }
 
     // Метод для получения проекта по идентификатору
@@ -44,4 +50,5 @@ public class ProjectRepository {
         }
         return false;
     }
+
 }

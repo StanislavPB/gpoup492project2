@@ -45,7 +45,6 @@ public class ProjectService {
 
     // Добавляем проект в репозиторий и сохраняем его
     String generatedId = projectRepository.addProject(project);  // Получаем ID, возвращённый репозиторием
-    project.setId(generatedId);  // Устанавливаем ID в объекте Project
 
     // Возвращаем сообщение об успешном создании проекта
     return "Проект " + project.getTitle() + " создан с ID " + generatedId + ".";
@@ -67,7 +66,7 @@ public class ProjectService {
     }
 
     // Проверяем, существует ли проект с таким названием
-    if (!projectRepository.existsProjectByTitle(projectDto.getTitle())) {
+    if (!projectRepository.existsProjectByName(projectDto.getTitle())) {
       return "Проект с названием " + projectDto.getTitle() + " не найден.";
     }
 
@@ -110,7 +109,7 @@ public class ProjectService {
       return "Проект с ID " + projectId + " не найден.";
     }
     project.getTasks().add(task);
-    projectRepository.updateProject(project);
+   //projectRepository.updateProject(project); - лишнее действие
     return "Задача " + task.getTitle() + " добавлена к проекту " + project.getTitle() + ".";
   }
 
