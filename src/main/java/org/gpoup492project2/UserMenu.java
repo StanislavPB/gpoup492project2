@@ -33,10 +33,9 @@ public class UserMenu {
                     System.out.println("3.2 Добавить задачу");
                     System.out.println("3.3 Редактировать задачу");
                     System.out.println("3.4 Удалить задачу");
-                    System.out.println("3.5 Управление комментариями задачи");
+                   // System.out.println("3.5 Управление комментариями задачи");
                     System.out.println("3.6 Изменить информацию о проекте");
-                    System.out.println("3.7 Управление комментариями проекта");
-                    System.out.println("3.8 Назначить ответственного за проект");
+                   // System.out.println("3.7 Управление комментариями проекта");
                     System.out.println("3.8 Назначить ответственного за проект");
                     System.out.println("4. Выйти из программы");
 
@@ -82,8 +81,16 @@ public class UserMenu {
                             System.out.println("Редактировать задачу");
                             break;
                         case 6:
-                            System.out.println("Выход из программы.");
-                            return;
+                            Task removeTask = taskService.deleteTask();
+                            System.out.println("Удалить задачу");
+                            break;
+                        case 7:
+                            Project updateProject = projectService.updateProject();
+                            System.out.println("Изменить информацию о проекте");
+                            break;
+                        case 8:
+                            System.out.println("Назначить ответственного за проект");
+                            break;
                         default:
                             System.out.println("Неверный пункт меню. Пожалуйста, попробуйте снова.");
                     }
