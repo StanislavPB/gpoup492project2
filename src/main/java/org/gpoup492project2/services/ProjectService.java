@@ -36,7 +36,7 @@ public class ProjectService {
     }
 
     // Проверяем, существует ли проект с таким названием
-    if (projectRepository.existsProjectByTitle(projectDto.getTitle())) {
+    if (projectRepository.existsProjectByName(projectDto.getTitle())) {
       return "Проект с названием " + projectDto.getTitle() + " уже существует.";
     }
 
@@ -123,7 +123,6 @@ public class ProjectService {
       return "Задача с ID " + taskId + " не найдена в проекте " + project.getTitle() + ".";
     }
     project.getTasks().remove(taskToRemove);
-    projectRepository.updateProject(project); //это так же лишнее?
     return "Задача с ID " + taskId + " удалена из проекта " + project.getTitle() + ".";
   }
 
@@ -134,7 +133,6 @@ public class ProjectService {
       return "Проект с ID " + projectId + " не найден.";
     }
     project.getComments().add(comment);
-    projectRepository.updateProject(project); //это так же лишнее?
     return "Комментарий добавлен к проекту " + project.getTitle() + ".";
   }
 
@@ -152,7 +150,6 @@ public class ProjectService {
       return "Комментарий с ID " + commentId + " не найден в проекте " + project.getTitle() + ".";
     }
     project.getComments().remove(commentToRemove);
-    projectRepository.updateProject(project); //это так же лишнее?
     return "Комментарий с ID " + commentId + " удалён из проекта " + project.getTitle() + ".";
   }
 

@@ -1,6 +1,8 @@
 package org.gpoup492project2.entity;
 
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 /**
