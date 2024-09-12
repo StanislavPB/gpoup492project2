@@ -1,5 +1,7 @@
 package org.gpoup492project2.Repository;
 
+import org.gpoup492project2.dto.TaskDto;
+import org.gpoup492project2.entity.Project;
 import org.gpoup492project2.entity.Task;
 
 import java.util.ArrayList;
@@ -11,18 +13,19 @@ import java.util.stream.Collectors;
 public class TaskRepository {
     private Map<String, Task> taskStorage = new HashMap<>();
 
+    // Метод для добавления задачи
     public void addTask(Task task) {
-        taskStorage.put(task.getId(), task);
+        taskStorage.put(task.getTitle(), task);
     }
 
-    // Метод для добавления задачи
-    public Task getTaskById(String id) {
-        return taskStorage.get(id);
+    // Метод для получения задачи по идентификатору
+    public boolean existsTaskById(String id) {
+        return taskStorage.containsKey(id);
     }
 
     // Метод для обновления задачи
     public void updateTask(Task taskToUpdate) {
-        taskStorage.put(taskToUpdate.getId(), taskToUpdate);
+        taskStorage.put(String.valueOf(taskToUpdate.getId()), taskToUpdate);
     }
 
     // Метод для удаления задачи
@@ -31,8 +34,8 @@ public class TaskRepository {
     }
 
     // Метод для получения списка всех задач
-    public List<Task> getAllTasks() {
-        return new ArrayList<>(taskStorage.values());
+    public Map<String, Task> getAllTasks() {
+        return taskStorage;
     }
 
     public List<Task> getTasksByStatus(String status) {
