@@ -80,6 +80,7 @@ public class UserMenu {
                             System.out.println("Редактировать задачу");
                             break;
                         case 6:
+                            Task updateTask = taskService.updateTask();
                             System.out.println("Выход из программы.");
                             return;
                         default:
