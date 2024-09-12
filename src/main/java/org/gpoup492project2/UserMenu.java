@@ -2,6 +2,7 @@ package org.gpoup492project2;
 
 import org.gpoup492project2.dto.ProjectDto;
 import org.gpoup492project2.entity.Project;
+import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.entity.User;
 import org.gpoup492project2.services.ProjectService;
 import org.gpoup492project2.services.TaskService;
@@ -57,7 +58,7 @@ public class UserMenu {
                             int projectCounter = 0;
                             for (int i = 0; i < allProjects.length; i++) {
                                 if (allProjects[i] != null){
-                                    System.out.println("Проект " + allProjects[i].getId() + " назыание: " + allProjects[i].getTitle());
+                                    System.out.println("Проект " + allProjects[i].getId() + " название: " + allProjects[i].getTitle());
                                     projectCounter++;
                                 }
                             }
@@ -66,13 +67,17 @@ public class UserMenu {
                             }
                             break;
                         case 3:
-                            //();
+                            Project[] choosenProject = allProjects[].getId();
+                            System.out.println("Управление проектом. Информация о проекте.");
+                            System.out.println(choosenProject);
                             break;
                         case 4:
-                            //();
+                            Task newTask = projectService.addTaskToProject();
+                           // String newTask = userInput.inputText("Введите название задачи: ");
+                            System.out.println("Задача добавлена" + newTask);
                             break;
                         case 5:
-                            //();
+                            System.out.println("Редактировать задачу");
                             break;
                         case 6:
                             System.out.println("Выход из программы.");
