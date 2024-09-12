@@ -19,7 +19,7 @@ public class UserMenu {
                 this.userService = userService;
             }
 
-            public void showMenu() {
+            public void menuStart() {
                 while (true) {
                     System.out.println("Главное Меню:");
                     System.out.println("1. Создать проект");
@@ -30,17 +30,20 @@ public class UserMenu {
                     System.out.println("3.3 Редактировать задачу");
                     System.out.println("3.3.1 Изменить название задачи");
                     System.out.println("3.3.2 Изменить описание задачи");
+                    System.out.println("3.3.3 Изменить дедлайн задачи");
+                    System.out.println("3.3.4 Изменить приоритет задачи");
+                    System.out.println("3.3.5 Изменить статус задачи");
+                    System.out.println("3.4 Удалить задачу");
 
 
-                    int choice = userInput.inputInt("Выберите пункт меню: ");
+                    int userChoose = userInput.inputInt("Выберите пункт меню: ");
 
 
-                    switch (choice) {
+                    switch (userChoose) {
                         case 1:
-                            projectService;
+                            Project newProject = projectService.createProject();
                             break;
                         case 2:
-                            setUserService();
                             break;
                         case 3:
                             //();
@@ -60,7 +63,7 @@ public class UserMenu {
                 }
             }
 
-           public void setProjectService() {
+           /*public void setProjectService() {
                 String title = userInput.inputText("Введите название проекта: ");
                 String description = userInput.inputText("Введите описание проекта: ");
                 String priority = userInput.inputText("Введите приротет проекта: ");
@@ -74,4 +77,5 @@ public class UserMenu {
                 User user = new User();
                 userService.createUser(new User(id, name, surname, login, password));
             }
+            */
         }
