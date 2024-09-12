@@ -8,9 +8,6 @@ import org.gpoup492project2.services.UserInput;
 import org.gpoup492project2.services.UserService;
 
 public class UserMenu {
-    public static void main(String[] args) {
-
-        public class UserMenu {
           private ProjectService projectService;
           private TaskService taskService;
           private UserService userService;
@@ -31,6 +28,8 @@ public class UserMenu {
                     System.out.println("3.1 Просмотреть информацию о проекте");
                     System.out.println("3.2 Добавить задачу");
                     System.out.println("3.3 Редактировать задачу");
+                    System.out.println("3.3.1 Изменить название задачи");
+                    System.out.println("3.3.2 Изменить описание задачи");
 
 
                     int choice = userInput.inputInt("Выберите пункт меню: ");
@@ -76,6 +75,3 @@ public class UserMenu {
                 userService.createUser(new User(id, name, surname, login, password));
             }
         }
-
-    }
-}
