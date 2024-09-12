@@ -4,90 +4,106 @@ import org.gpoup492project2.Repository.ProjectRepository;
 import org.gpoup492project2.entity.Project;
 import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.dto.ProjectDto;
+import org.gpoup492project2.entity.Comment;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Сервисный класс для управления проектами.
+ * Этот класс предоставляет методы для создания, обновления, удаления и получения проектов,
+ * а также для добавления и удаления задач и комментариев в проекте. Использует репозиторий ProjectRepository
+ * для взаимодействия с данными проектов.
+ */
+
 public class ProjectService {
 
   // Репозиторий для работы с проектами
-  private ProjectRepository projectRepository;
+  private final ProjectRepository projectRepository;
 
   // Конструктор, который получает репозиторий для работы
   public ProjectService(ProjectRepository projectRepository) {
     this.projectRepository = projectRepository;
   }
 
-  // Метод для создания проекта из DTO
+  //Создание проекта из DTO.
   public String createProject(ProjectDto projectDto) {
     // Валидируем входные данные
     if (!validateProjectDto(projectDto)) {
       return "Некорректные данные для создания проекта.";
     }
 
-    // Проверяем, существует ли проект с таким ID
-    if (projectRepository.existsProjectById(projectDto.getTitle())) {
+    // Проверяем, существует ли проект с таким названием
+    if (projectRepository.existsProjectByTitle(projectDto.getTitle())) {
       return "Проект с названием " + projectDto.getTitle() + " уже существует.";
     }
 
     // Преобразуем DTO в объект Project
     Project project = projectDto.toProject();
-    projectRepository.addProject(project);
-    return "Проект " + project.getTitle() + " создан.";
+
+    // Добавляем проект в репозиторий и сохраняем его
+    String generatedId = projectRepository.addProject(project);  // Получаем ID, возвращённый репозиторием
+    project.setId(generatedId);  // Устанавливаем ID в объекте Project
+
+    // Возвращаем сообщение об успешном создании проекта
+    return "Проект " + project.getTitle() + " создан с ID " + generatedId + ".";
   }
 
-  // Метод для получения проекта по ID
-  public Optional<Project> getProjectById(String idProject) {
-    Project project = projectRepository.getProjectById(idProject);
-    return Optional.ofNullable(project);
+  //Получение проекта по ID.
+
+  public Optional<Project> getProjectById(String id) {
+    return Optional.ofNullable(projectRepository.getProjectById(id));
   }
 
-  // Метод для обновления проекта
+
+  //Обновление проекта.
+
   public String updateProject(ProjectDto projectDto) {
     // Валидируем входные данные
     if (!validateProjectDto(projectDto)) {
       return "Некорректные данные для обновления проекта.";
     }
 
-    // Проверяем, существует ли проект с таким ID
-    if (!projectRepository.existsProjectById(projectDto.getTitle())) {
+    // Проверяем, существует ли проект с таким названием
+    if (!projectRepository.existsProjectByTitle(projectDto.getTitle())) {
       return "Проект с названием " + projectDto.getTitle() + " не найден.";
     }
 
     // Преобразуем DTO в объект Project
     Project project = projectDto.toProject();
+
+    // Обновляем проект в репозитории
     projectRepository.updateProject(project);
+
+    // Возвращаем сообщение об успешном обновлении проекта
     return "Проект " + project.getTitle() + " обновлён.";
   }
 
-  // Метод для удаления проекта
-  public String deleteProject(String idProject) {
-    if (!projectRepository.existsProjectById(idProject)) {
-      return "Проект с ID " + idProject + " не найден.";
+  //Удаление проекта по ID.
+  public String deleteProject(String id) {
+    if (!projectRepository.existsProjectById(id)) {
+      return "Проект с ID " + id + " не найден.";
     }
-    projectRepository.deleteProject(idProject);
-    return "Проект с ID " + idProject + " удалён.";
+    projectRepository.deleteProject(id);
+    return "Проект с ID " + id + " удалён.";
   }
 
-  // Метод для получения всех проектов
+  //Получение всех проектов.
   public Map<String, Project> getAllProjects() {
     return projectRepository.getAllProjects();
   }
 
-  // Метод для поиска проекта по названию
+  //Поиск проекта по названию.
   public Optional<Project> findProjectByName(String name) {
     List<Project> projects = projectRepository.getAllProjects().values().stream()
             .filter(project -> project.getTitle().equalsIgnoreCase(name))
             .collect(Collectors.toList());
-    if (projects.isEmpty()) {
-      return Optional.empty();
-    }
-    return Optional.of(projects.get(0));
+    return projects.isEmpty() ? Optional.empty() : Optional.of(projects.get(0));
   }
 
-  // Метод для добавления задачи к проекту
+  //Добавление задачи к проекту.
   public String addTaskToProject(String projectId, Task task) {
     Project project = projectRepository.getProjectById(projectId);
     if (project == null) {
@@ -98,7 +114,7 @@ public class ProjectService {
     return "Задача " + task.getTitle() + " добавлена к проекту " + project.getTitle() + ".";
   }
 
-  // Метод для удаления задачи из проекта
+  //Удаление задачи из проекта.
   public String removeTaskFromProject(String projectId, String taskId) {
     Project project = projectRepository.getProjectById(projectId);
     if (project == null) {
@@ -116,7 +132,36 @@ public class ProjectService {
     return "Задача с ID " + taskId + " удалена из проекта " + project.getTitle() + ".";
   }
 
-  // Метод для валидации данных проекта
+  //Добавление комментария к проекту.
+  public String addCommentToProject(String projectId, Comment comment) {
+    Project project = projectRepository.getProjectById(projectId);
+    if (project == null) {
+      return "Проект с ID " + projectId + " не найден.";
+    }
+    project.getComments().add(comment);
+    projectRepository.updateProject(project);
+    return "Комментарий добавлен к проекту " + project.getTitle() + ".";
+  }
+
+  //Удаление комментария из проекта.
+  public String removeCommentFromProject(String projectId, String commentId) {
+    Project project = projectRepository.getProjectById(projectId);
+    if (project == null) {
+      return "Проект с ID " + projectId + " не найден.";
+    }
+    Comment commentToRemove = project.getComments().stream()
+            .filter(comment -> comment.getId().equals(commentId))
+            .findFirst()
+            .orElse(null);
+    if (commentToRemove == null) {
+      return "Комментарий с ID " + commentId + " не найден в проекте " + project.getTitle() + ".";
+    }
+    project.getComments().remove(commentToRemove);
+    projectRepository.updateProject(project);
+    return "Комментарий с ID " + commentId + " удалён из проекта " + project.getTitle() + ".";
+  }
+
+  //Валидация данных проекта.
   private boolean validateProjectDto(ProjectDto projectDto) {
     return projectDto.getTitle() != null && !projectDto.getTitle().isEmpty() &&
             projectDto.getDescription() != null &&
@@ -127,4 +172,8 @@ public class ProjectService {
             projectDto.getExecutor() != null;
   }
 }
+
+
+
+
 

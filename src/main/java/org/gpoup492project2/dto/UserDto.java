@@ -10,52 +10,61 @@ import org.gpoup492project2.entity.User;
 
 public class UserDto {
 
-        //Поля которые мы используем в UserDTO
-        private String name;
-        private String surname;
-        private String login;
-        private Object passwordHash;
+    // Поля DTO, соответствующие полям класса User
+    private String name;              // Имя пользователя
+    private String surname;           // Фамилия пользователя
+    private String login;             // Логин пользователя
+    private Object passwordHash;      // Хэш пароля пользователя
 
-        // Конструктор с параметрами
-        public void UserDTO(String name, String surname, String login, Object passwordHash) {
-            this.name = name;
-            this.surname = surname;
-            this.login = login;
-            this.passwordHash = passwordHash;
-        }
+    // Конструктор с параметрами
+    public UserDto(String name, String surname, String login, Object passwordHash) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.passwordHash = passwordHash;
+    }
 
-        // Геттеры и сеттеры
-        public String getName() {
-            return name;
-        }
+    // Преобразование DTO в объект User
+    public User toUser() {
+        return new User(
+                this.name,
+                this.surname,
+                this.login,
+                this.passwordHash
+        );
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    // Геттеры и сеттеры для всех полей
 
-        public String getSurname() {
-            return surname;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public void setSurname(String surname) {
-            this.surname = surname;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public String getLogin() {
-            return login;
-        }
+    public String getSurname() {
+        return surname;
+    }
 
-        public void setLogin(String login) {
-            this.login = login;
-        }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-        public Object getPasswordHash() {
-            return passwordHash;
-        }
+    public String getLogin() {
+        return login;
+    }
 
-        public void setPasswordHash(Object passwordHash) {
-            this.passwordHash = passwordHash;
-        }
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
+    public Object getPasswordHash() {
+        return passwordHash;
+    }
 
+    public void setPasswordHash(Object passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 }

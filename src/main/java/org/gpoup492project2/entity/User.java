@@ -35,7 +35,6 @@ public class User {
     private String login;  // Логин пользователя для аутентификации
     private Object passwordHash; // Храним хеш пароля
 
-
     // Конструктор
     public User(int id, String name, String surname, String login, String password, Object passwordHash) {
         this.id = id;

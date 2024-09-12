@@ -34,14 +34,15 @@ import java.util.Objects;
   - hashCode(): Вычисляет хэш-код для объекта Task.
     Используется для корректного функционирования хэш-таблиц и других коллекций.
  */
+
 public class Task {
 
-    // Строковые константы для статусов задачи
+    // Список для статусов задачи
     public static final String STATUS_IN_PROGRESS = "В работе";
     public static final String STATUS_COMPLETED = "Завершена";
     public static final String STATUS_PENDING = "Ожидает";
 
-    // Строковые константы для приоритетов задачи
+    // Список для приоритетов задачи
     public static final String PRIORITY_HIGH = "Приоритет высокий";
     public static final String PRIORITY_MEDIUM = "Средний приоритет";
     public static final String PRIORITY_LOW = "Приоритет низкий";
@@ -55,9 +56,10 @@ public class Task {
     private String priority;          // Приоритет задачи (например, высокий, средний, низкий)
     private String status;            // Статус задачи (например, в работе, завершена, ожидает)
     private User executor;            // Ответственный пользователь
+    private List<Comment> comments;   // Добавлено для хранения комментариев
 
     // Конструктор класса Task
-    public Task(String id, String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor) {
+    public Task(String id, String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -66,6 +68,7 @@ public class Task {
         this.priority = priority;
         this.status = status;
         this.executor = executor;
+        this.comments = comments;
     }
 
     // Геттеры для доступа к полям задачи
@@ -101,6 +104,10 @@ public class Task {
         return executor;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
     // Сеттеры для обновления данных задачи
     public void setTitle(String title) {
         this.title = title;
@@ -126,6 +133,10 @@ public class Task {
         this.executor = executor;
     }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     // Метод для редактирования задачи
     public void editTask(String newTitle, String newDescription, LocalDate newDeadline, String newPriority, String newStatus) {
         // Обновляем поля задачи
@@ -136,7 +147,6 @@ public class Task {
         this.status = newStatus;
     }
 
-    // Метод toString для удобного вывода информации о задаче
     @Override
     public String toString() {
         return "Task{" +
@@ -147,7 +157,8 @@ public class Task {
                 ", deadline=" + deadline +
                 ", priority='" + priority + '\'' +
                 ", status='" + status + '\'' +
-                ", executor=" + executor.getName() + " " + executor.getSurname() +
+                ", executor=" + executor +
+                ", comments=" + comments +
                 '}';
     }
 
