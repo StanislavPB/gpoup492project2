@@ -10,7 +10,6 @@ public class ProjectRepository {
 
     private Integer idCounter = 0;
 
-
     public String addProject(Project project) {
         idCounter++; // увеличиваем счетчик проектов
         project.setId(idCounter.toString());// Устанавливаем ID в объекте Project

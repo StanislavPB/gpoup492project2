@@ -35,7 +35,8 @@ public class TaskDto {
     }
 
     // Преобразование DTO в объект Task
-    public Task createTask(Task task) {
+    public Task createTask() {
+        Task task=new Task(title);
         task.setTitle(this.title);
         task.setDescription(this.description);
         task.setCreated(this.created);

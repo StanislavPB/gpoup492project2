@@ -29,7 +29,7 @@ public class TaskService {
         }
 
         // Преобразуем DTO в объект Task
-        Task task = taskDto.toTask();
+        Task task = taskDto.createTask();
         taskRepository.addTask(task);
         return "Задача " + task.getTitle() + " создана.";
     }
@@ -52,7 +52,7 @@ public class TaskService {
         }
 
         // Преобразуем DTO в объект Task
-        Task task = taskDto.toTask();
+        Task task = taskDto.createTask();
         taskRepository.updateTask(task);
         return "Задача " + task.getTitle() + " Обновлена";
     }

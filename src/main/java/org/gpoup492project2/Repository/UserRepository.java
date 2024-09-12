@@ -15,7 +15,7 @@ public class UserRepository {
     }
 
     // Метод для получения пользователя по идентификатору
-    public User getUserById(String id) {
+    public User getUserById(Integer id) {
         return userMap.get(id);
     }
 
@@ -25,7 +25,7 @@ public class UserRepository {
     }
 
     // Метод для удаления пользователя
-    public void deleteUser(String id) {
+    public void deleteUser(Integer id) {
 
     }
     // Метод для получения всех пользователей

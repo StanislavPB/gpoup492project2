@@ -137,6 +137,10 @@ public class Task {
         this.comments = comments;
     }
 
+    public void setCreated(LocalDate created) {
+        this.created = created;
+    }
+
     // Метод для редактирования задачи
     public void editTask(String newTitle, String newDescription, LocalDate newDeadline, String newPriority, String newStatus) {
         // Обновляем поля задачи

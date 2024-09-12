@@ -26,7 +26,7 @@ public class UserDto {
 
     // Преобразование DTO в объект User
     public User toUser() {
-        return new User(
+        return new User(0,
                 this.name,
                 this.surname,
                 this.login,

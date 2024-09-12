@@ -1,6 +1,5 @@
 package org.gpoup492project2.services;
 
-
 import org.gpoup492project2.Repository.UserRepository;
 import org.gpoup492project2.entity.User;
 
@@ -17,7 +16,7 @@ public class UserService {
 
     // Метод для создания пользователя
     public User createUser(int id, String name, String surname, String login, String password) {
-        User user = new User(id, name, surname, login, password, name);
+        User user = new User(id, name, surname, login, password);
         userRepository.save(user);
         return user;
     }

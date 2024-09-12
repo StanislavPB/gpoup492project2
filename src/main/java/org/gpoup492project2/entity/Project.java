@@ -2,6 +2,7 @@ package org.gpoup492project2.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,6 +39,7 @@ import java.util.Objects;
  */
 public class Project {
 
+
     // Вложенный класс для хранения констант приоритетов
     public static class Priority {
         public static final String HIGH = "Приоритет высокий";
@@ -58,8 +60,8 @@ public class Project {
     private String description;       // Описание проекта
     private LocalDate created;        // Дата создания проекта
     private LocalDate deadline;       // Дата завершения проекта
-    private String priority;          // Приоритет проекта (использует константы из класса Priority)
-    private String status;            // Статус проекта (использует константы из класса Status)
+    private Project priority;          // Приоритет проекта (использует константы из класса Priority)
+    private Status status;            // Статус проекта (использует константы из класса Status)
     private User executor;            // Ответственный пользователь
     private List<Task> tasks;         // Список задач (начально пустой)
 
@@ -114,8 +116,6 @@ public class Project {
     }
 
     // Сеттеры для обновления данных проекта
-
-
     public void setId(String id) {
         this.id = id;
     }
