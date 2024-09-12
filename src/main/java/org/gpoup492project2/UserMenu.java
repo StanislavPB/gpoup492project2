@@ -32,12 +32,13 @@ public class UserMenu {
                     System.out.println("3.1 Просмотреть информацию о проекте");
                     System.out.println("3.2 Добавить задачу");
                     System.out.println("3.3 Редактировать задачу");
-                    System.out.println("3.3.1 Изменить название задачи");
-                    System.out.println("3.3.2 Изменить описание задачи");
-                    System.out.println("3.3.3 Изменить дедлайн задачи");
-                    System.out.println("3.3.4 Изменить приоритет задачи");
-                    System.out.println("3.3.5 Изменить статус задачи");
                     System.out.println("3.4 Удалить задачу");
+                    System.out.println("3.5 Управление комментариями задачи");
+                    System.out.println("3.6 Изменить информацию о проекте");
+                    System.out.println("3.7 Управление комментариями проекта");
+                    System.out.println("3.8 Назначить ответственного за проект");
+                    System.out.println("3.8 Назначить ответственного за проект");
+                    System.out.println("4. Выйти из программы");
 
                     int userChoose = userInput.inputInt("Выберите пункт меню: ");
 
@@ -77,6 +78,7 @@ public class UserMenu {
                             System.out.println("Задача добавлена" + newTask);
                             break;
                         case 5:
+                            Task updateTask = taskService.updateTask();
                             System.out.println("Редактировать задачу");
                             break;
                         case 6:
