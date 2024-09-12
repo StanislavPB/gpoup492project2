@@ -60,13 +60,13 @@ public class Project {
     private String description;       // Описание проекта
     private LocalDate created;        // Дата создания проекта
     private LocalDate deadline;       // Дата завершения проекта
-    private Project priority;          // Приоритет проекта (использует константы из класса Priority)
+    private Priority priority;          // Приоритет проекта (использует константы из класса Priority)
     private Status status;            // Статус проекта (использует константы из класса Status)
     private User executor;            // Ответственный пользователь
     private List<Task> tasks;         // Список задач (начально пустой)
 
     // Конструктор класса Project
-    public Project(String id, String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor) {
+    public Project(String id, String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status, User executor) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -99,11 +99,11 @@ public class Project {
         return deadline;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -132,11 +132,11 @@ public class Project {
         this.deadline = deadline;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
