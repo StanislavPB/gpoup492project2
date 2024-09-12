@@ -13,9 +13,15 @@ import java.util.stream.Collectors;
 public class TaskRepository {
     private Map<String, Task> taskStorage = new HashMap<>();
 
+    private Integer idCounter = 0;
+
     // Метод для добавления задачи
-    public void addTask(Task task) {
-        taskStorage.put(task.getTitle(), task);
+    public String addTask(Task task) {
+        idCounter++;// увеличиваем счетчик задач
+        task.setId(idCounter.toString());// Устанавливаем ID в объекте Task
+        taskStorage.put(idCounter.toString(), task); // положили Task в коллекцию
+        return idCounter.toString(); // вернули номер задачи
+        //taskStorage.put(task.getTitle(), task);
     }
 
     // Метод для получения задачи по идентификатору
