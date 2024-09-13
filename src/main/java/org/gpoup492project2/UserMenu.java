@@ -40,8 +40,8 @@ public class UserMenu {
                             String title = userInput.inputText("Введите название проекта: ");
                             String description = userInput.inputText("Введите описание проекта: ");
                             String deadlin = userInput.inputText("Введите дедллайн проекта (yyyy-mm-dd): ");
-                            Priority newProjectPriority = userInput.inputText("Введите приоритет проекта: ");
-                            String status = userInput.inputText("Введите статус проекта: ");
+                            Priority newProjectPriority = userInput.inputPriority("Выбери один из приоритетов проекта (HIGH / IMEDIUM / LOW) и введи его: " );
+                            Status newProjectStatus = userInput.inputStatus("Выбери один из статусув проекта (NOT_STARTED / IN_PROGRESS / COMPLETED) и введи его: " );
                             // Получаем исполнителя
                             int executorId = userInput.inputInt("Введите ID исполнителя: ");
                             User executor = userService.getUserById(executorId);
