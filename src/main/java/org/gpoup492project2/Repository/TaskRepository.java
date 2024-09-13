@@ -18,7 +18,7 @@ public class TaskRepository {
     // Метод для добавления задачи
     public String addTask(Task task) {
         idCounter++;// увеличиваем счетчик задач
-        task.setId(idCounter.toString());// Устанавливаем ID в объекте Task
+        task.setId (idCounter.toString());// Устанавливаем ID в объекте Task
         taskStorage.put(idCounter.toString(), task); // положили Task в коллекцию
         return idCounter.toString(); // вернули номер задачи
         //taskStorage.put(task.getTitle(), task);

@@ -17,18 +17,18 @@ import java.util.List;
 public class ProjectDto {
 
     // Поля DTO, соответствующие полям класса Project
-    private String title;            // Название проекта
-    private String description;      // Описание проекта
-    private LocalDate created;       // Дата создания проекта
-    private LocalDate deadline;      // Дата завершения проекта
-    private String priority;         // Приоритет проекта
-    private String status;           // Статус проекта
-    private User executor;           // Ответственный пользователь
-    private List<Task> tasks;        // Список задач
+    private String title;                      // Название проекта
+    private String description;                // Описание проекта
+    private LocalDate created;                 // Дата создания проекта
+    private LocalDate deadline;                // Дата завершения проекта
+    private Project.Priority priority;         // Приоритет проекта
+    private Project.Status status;             // Статус проекта
+    private User executor;                     // Ответственный пользователь
+    private List<Task> tasks;                  // Список задач
 
     // Конструктор для инициализации всех полей
     public ProjectDto(String title, String description, LocalDate created, LocalDate deadline,
-                      String priority, String status, User executor) {
+                      Project.Priority priority, Project.Status status) {
         this.title = title;
         this.description = description;
         this.created = created;
@@ -42,7 +42,7 @@ public class ProjectDto {
     // Преобразование DTO в объект Project
     public Project toProject() {
         return new Project(null, this.title, this.description, this.created, this.deadline,
-                this.priority, this.status, this.executor,this.tasks,this);
+                this.priority, this.status, this.executor,this.tasks,new ArrayList<>());
     }
 
     // Геттеры и сеттеры для всех полей
@@ -79,19 +79,19 @@ public class ProjectDto {
         this.deadline = deadline;
     }
 
-    public String getPriority() {
+    public Project.Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Project.Priority priority) {
         this.priority = priority;
     }
 
-    public String getStatus() {
+    public Project.Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Project.Status status) {
         this.status = status;
     }
 

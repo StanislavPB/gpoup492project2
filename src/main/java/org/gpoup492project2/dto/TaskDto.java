@@ -113,5 +113,11 @@ public class TaskDto {
     public void setExecutor(User executor) {
         this.executor = executor;
     }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+
 }
 
