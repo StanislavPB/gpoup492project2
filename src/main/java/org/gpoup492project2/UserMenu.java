@@ -49,7 +49,7 @@ public class UserMenu {
                                 System.out.println("Исполнитель не найден.");
                                 break;
                             }
-                            ProjectDto projectDto = new ProjectDto(title, description, LocalDate.parse(deadlin), priority , status, executor);
+                            ProjectDto projectDto = new ProjectDto(title, description, LocalDate.parse(deadlin), new Priority, newProjectStatus, executor);
                             String newProject = projectService.createProject(projectDto);
                             if (newProject != null){
                                 System.out.println("Успешно добавлен новый проект.");
@@ -97,7 +97,7 @@ public class UserMenu {
                                     String newTaskTitle = userInput.inputText("Введите название задачи: ");
                                     Status newTaskStatus = userInput.inputStatus("Выбери один из статусув задачи (NOT_STARTED / IN_PROGRESS / COMPLETED) и введи его: " );
                                     Priority newTaskPriority = userInput.inputPriority("Выбери один из приоритетов задачи (HIGH / IMEDIUM / LOW) и введи его: " );
-
+                                    // по идее тут нужно добавить все что у нас в дто
                                     Task newTask = taskService.createTask(new TaskDto(newTaskTitle, taskProjectId,);
                                     if (newTask != null) {
                                         System.out.println("Задача добавлена" + newTask);
