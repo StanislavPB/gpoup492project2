@@ -1,6 +1,7 @@
 package org.gpoup492project2;
 
 import org.gpoup492project2.dto.ProjectDto;
+import org.gpoup492project2.dto.TaskDto;
 import org.gpoup492project2.entity.Project;
 import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.entity.User;
@@ -9,6 +10,7 @@ import org.gpoup492project2.services.TaskService;
 import org.gpoup492project2.services.UserInput;
 import org.gpoup492project2.services.UserService;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 public class UserMenu {
@@ -29,23 +31,27 @@ public class UserMenu {
                     System.out.println("1. Создать проект");
                     System.out.println("2. Просмотреть все проекты");
                     System.out.println("3. Управлять проектом");
-                    System.out.println("3.1 Просмотреть информацию о проекте");
-                    System.out.println("3.2 Добавить задачу");
-                    System.out.println("3.3 Редактировать задачу");
-                    System.out.println("3.4 Удалить задачу");
-                   // System.out.println("3.5 Управление комментариями задачи");
-                    System.out.println("3.6 Изменить информацию о проекте");
-                   // System.out.println("3.7 Управление комментариями проекта");
-                    System.out.println("3.8 Назначить ответственного за проект");
                     System.out.println("4. Выйти из программы");
 
                     int userChoose = userInput.inputInt("Выберите пункт меню: ");
 
                     switch (userChoose) {
                         case 1:
-                            //String nameNewProject = userInput.inputText("Введите название проекта: ");
-                           // String descriptionNewProject = userInput.inputText("Введите описание проекта: ");
-                            Project newProject = projectService.createProject(ProjectDto projectDto);
+                            // Создание проекта
+                            String title = userInput.inputText("Введите название проекта: ");
+                            String description = userInput.inputText("Введите описание проекта: ");
+                            String deadlin = userInput.inputText("Введите дедллайн проекта (yyyy-mm-dd): ");
+                            String priority = userInput.inputText("Введите приоритет проекта: ");
+                            String status = userInput.inputText("Введите статус проекта: ");
+                            // Получаем исполнителя
+                            int executorId = userInput.inputInt("Введите ID исполнителя: ");
+                            User executor = userService.getUserById(executorId);
+                            if (executor == null) {
+                                System.out.println("Исполнитель не найден.");
+                                break;
+                            }
+                            ProjectDto projectDto = new ProjectDto(title, description, LocalDate.parse(deadline), priority, status, executor);
+                            Project newProject = projectService.createProject(projectDto);
                             if (newProject != null){
                                 System.out.println("Успешно добавлен новый проект.");
                                 System.out.println(newProject);
@@ -53,21 +59,19 @@ public class UserMenu {
                                 System.out.println("Проект добавить не удалось.");
                             }
                             break;
+
                         case 2:
-                            Project[] allProjects = projectService.getAllProjects();
-                            int projectCounter = 0;
-                            for (int i = 0; i < allProjects.length; i++) {
-                                if (allProjects[i] != null){
-                                    System.out.println("Проект " + allProjects[i].getId() + " название: " + allProjects[i].getTitle());
-                                    projectCounter++;
-                                }
-                            }
-                            if (projectCounter == 0){
-                                System.out.println("Проект не найден.");
+                            // Просмотр всех проектов
+                            Map<String, Project> allProjects = projectService.getAllProjects();
+                            if (allProjects.isEmpty()) {
+                                System.out.println("Проект не найден");
+                            } else {
+                                allProjects.values().forEach(System.out::println);
                             }
                             break;
 
                         case 3:
+                            // Управление проектом
                             System.out.println("3.1 Просмотреть информацию о проекте");
                             System.out.println("3.2 Добавить задачу");
                             System.out.println("3.3 Редактировать задачу");
@@ -78,6 +82,7 @@ public class UserMenu {
                             int subChoose = userInput.inputInt("Выберите пункт подменю: ");
 
                             switch (subChoose) {
+                                // Просмотр информации о проекте
                                 case 1:
                                     String projectId = userInput.inputText("Введите id проекта: ");
                                     Project project = projectService.getProjectById(projectId);
@@ -88,9 +93,10 @@ public class UserMenu {
                                     }
                                     break;
                                 case 2:
+                                    // Добавление задачи
                                     String taskProjectId = userInput.inputText("Введите id проекта для добавления задачи: ");
                                     String newTaskTitle = userInput.inputText("Введите название задачи: ");
-                                    Task newTask = projectService.addTaskToProject(taskProjectId, newTaskTitle);
+                                    Task newTask = taskService.createTask(new TaskDto(taskTitle, projectIdForTask));
                                     if (newTask != null) {
                                         System.out.println("Задача добавлена" + newTask);
                                     } else {
@@ -98,6 +104,7 @@ public class UserMenu {
                                     }
                                     break;
                                 case 3:
+                                    // Редактирование задачи
                                     String taskIdToUpdate = userInput.inputText("Введите id задачи для редактирования: ");
                                     Task updatedTask = taskService.updateTask(taskIdToUpdate);
                                     if (updatedTask != null) {
@@ -107,6 +114,7 @@ public class UserMenu {
                                     }
                                     break;
                                 case 4:
+                                    // Удаление задачи
                                     String taskIdToDelete = userInput.inputText("Введите id задачи для удаления: ");
                                     boolean removeTask = taskService.deleteTask(taskIdToDelete);
                                     if (removeTask) {
@@ -114,8 +122,12 @@ public class UserMenu {
                                     } else {
                                         System.out.println("Не удалось удалить задачу");
                                     }
+                                    // или попробовать этот вариант:
+                                    // String deleteResult = taskService.deleteTask(taskIdToDelete);
+                                    // System.out.println(deleteResult);
                                     break;
                                 case 5:
+                                    // Изменение информации о проекте
                                     String projectIdToUpdate = userInput.inputText("Введите id проекта для редактирования: ");
                                     Project updateProject = projectService.updateProject(projectIdToUpdate);
                                     if (updateProject != null) {
@@ -125,9 +137,11 @@ public class UserMenu {
                                     }
                                     break;
                                 case 6:
+                                    // Назначение ответственного за проект
                                     String projectIdForExecutor = userInput.inputText("Введите id проекта для назначения ответственного: ");
                                     String userId = userInput.inputText("Введите id пользователя для назначения: ");
                                     User executorForProject = userService.getUserById(userId);
+                                    projectService.assignExecutor(projectIdForExecutor, executorForProject);
                                     if (executorForProject != null) {
                                         System.out.println("Ответственный назначен");
                                     } else {
