@@ -2,9 +2,7 @@ package org.gpoup492project2;
 
 import org.gpoup492project2.dto.ProjectDto;
 import org.gpoup492project2.dto.TaskDto;
-import org.gpoup492project2.entity.Project;
-import org.gpoup492project2.entity.Task;
-import org.gpoup492project2.entity.User;
+import org.gpoup492project2.entity.*;
 import org.gpoup492project2.services.ProjectService;
 import org.gpoup492project2.services.TaskService;
 import org.gpoup492project2.services.UserInput;
@@ -12,6 +10,7 @@ import org.gpoup492project2.services.UserService;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Optional;
 
 public class UserMenu {
           private ProjectService projectService;
@@ -50,8 +49,8 @@ public class UserMenu {
                                 System.out.println("Исполнитель не найден.");
                                 break;
                             }
-                            ProjectDto projectDto = new ProjectDto(title, description, LocalDate.parse(deadline), priority, status, executor);
-                            Project newProject = projectService.createProject(projectDto);
+                            ProjectDto projectDto = new ProjectDto(title, description, LocalDate.parse(deadlin), priority , status, executor);
+                            String newProject = projectService.createProject(projectDto);
                             if (newProject != null){
                                 System.out.println("Успешно добавлен новый проект.");
                                 System.out.println(newProject);
@@ -85,7 +84,7 @@ public class UserMenu {
                                 // Просмотр информации о проекте
                                 case 1:
                                     String projectId = userInput.inputText("Введите id проекта: ");
-                                    Project project = projectService.getProjectById(projectId);
+                                    Optional <Project> project = projectService.getProjectById(projectId);
                                     if (project != null) {
                                         System.out.println("Информация о проекте: " + project);
                                     } else {
@@ -96,7 +95,10 @@ public class UserMenu {
                                     // Добавление задачи
                                     String taskProjectId = userInput.inputText("Введите id проекта для добавления задачи: ");
                                     String newTaskTitle = userInput.inputText("Введите название задачи: ");
-                                    Task newTask = taskService.createTask(new TaskDto(taskTitle, projectIdForTask));
+                                    Status newTaskStatus = userInput.inputStatus("Выбери один из статусув задачи (NOT_STARTED / IN_PROGRESS / COMPLETED) и введи его: " );
+                                    Priority newTaskPriority = userInput.inputPriority("Выбери один из приоритетов задачи (HIGH / IMEDIUM / LOW) и введи его: " );
+
+                                    Task newTask = taskService.createTask(new TaskDto(newTaskTitle, taskProjectId,);
                                     if (newTask != null) {
                                         System.out.println("Задача добавлена" + newTask);
                                     } else {
@@ -116,15 +118,9 @@ public class UserMenu {
                                 case 4:
                                     // Удаление задачи
                                     String taskIdToDelete = userInput.inputText("Введите id задачи для удаления: ");
-                                    boolean removeTask = taskService.deleteTask(taskIdToDelete);
-                                    if (removeTask) {
-                                        System.out.println("Задача удалена");
-                                    } else {
-                                        System.out.println("Не удалось удалить задачу");
-                                    }
-                                    // или попробовать этот вариант:
-                                    // String deleteResult = taskService.deleteTask(taskIdToDelete);
-                                    // System.out.println(deleteResult);
+
+                                    String deleteResult = taskService.deleteTask(taskIdToDelete);
+                                    System.out.println(deleteResult);
                                     break;
                                 case 5:
                                     // Изменение информации о проекте
@@ -150,7 +146,7 @@ public class UserMenu {
                                     break;
                                 default:
                                     System.out.println("Неверный пункт подменю. Пожалуйста, попробуйте снова.");
-                            }
+
                             break;
                         case 4:
                             System.out.println("Выход из программы.");

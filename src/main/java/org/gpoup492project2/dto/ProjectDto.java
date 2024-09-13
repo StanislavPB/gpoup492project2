@@ -9,6 +9,8 @@ package org.gpoup492project2.dto;
 import org.gpoup492project2.entity.Project;
 import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.entity.User;
+import org.gpoup492project2.entity.Priority;
+import org.gpoup492project2.entity.Status;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,14 +23,13 @@ public class ProjectDto {
     private String description;                // Описание проекта
     private LocalDate created;                 // Дата создания проекта
     private LocalDate deadline;                // Дата завершения проекта
-    private Project.Priority priority;         // Приоритет проекта
-    private Project.Status status;             // Статус проекта
+    private Priority priority;                 // Приоритет проекта
+    private Status status;                     // Статус проекта
     private User executor;                     // Ответственный пользователь
     private List<Task> tasks;                  // Список задач
 
     // Конструктор для инициализации всех полей
-    public ProjectDto(String title, String description, LocalDate created, LocalDate deadline,
-                      Project.Priority priority, Project.Status status) {
+    public ProjectDto(String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status) {
         this.title = title;
         this.description = description;
         this.created = created;
@@ -79,19 +80,19 @@ public class ProjectDto {
         this.deadline = deadline;
     }
 
-    public Project.Priority getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(Project.Priority priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public Project.Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Project.Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -1,5 +1,9 @@
 package org.gpoup492project2.services;
 
+import org.gpoup492project2.entity.Priority;
+import org.gpoup492project2.entity.Project;
+import org.gpoup492project2.entity.Status;
+
 import java.util.Scanner;
 
 public class UserInput {
@@ -24,4 +28,21 @@ public class UserInput {
         String input = scanner.nextLine();
         return input;
     }
+
+    public Status inputStatus(String message){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        String input = scanner.nextLine();
+        Status taskStatus = Status.valueOf(input.toUpperCase());
+        return taskStatus;
+    }
+
+    public Priority inputPriority(String message){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        String input = scanner.nextLine();
+        Priority taskPriority = Priority.valueOf(input.toUpperCase());
+        return taskPriority;
+    }
+
 }

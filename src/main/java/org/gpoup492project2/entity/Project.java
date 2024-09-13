@@ -39,21 +39,6 @@ import java.util.Objects;
  */
 public class Project {
 
-
-    // Вложенный класс для хранения констант приоритетов
-    public static class Priority {
-        public static final String HIGH = "Приоритет высокий";
-        public static final String MEDIUM = "Средний приоритет";
-        public static final String LOW = "Приоритет низкий";
-    }
-
-    // Вложенный класс для хранения констант статусов
-    public static class Status {
-        public static final String NOT_STARTED = "Не начат";
-        public static final String IN_PROGRESS = "В работе";
-        public static final String COMPLETED = "Завершен";
-    }
-
     // Поля класса Project
     private String id;                // Уникальный идентификатор проекта (будет присвоен после добавления в репозиторий)
     private String title;             // Название проекта
@@ -178,29 +163,6 @@ public class Project {
                 ", executor=" + executor.getName() + " " + executor.getSurname() +
                 ", tasks=" + tasks.size() + " tasks" +
                 '}';
-    }
 
-    // Метод equals для сравнения двух объектов Project
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Project project = (Project) o;
-        return Objects.equals(id, project.id) &&
-                Objects.equals(title, project.title) &&
-                Objects.equals(description, project.description) &&
-                Objects.equals(created, project.created) &&
-                Objects.equals(deadline, project.deadline) &&
-                Objects.equals(priority, project.priority) &&
-                Objects.equals(status, project.status) &&
-                Objects.equals(executor, project.executor) &&
-                Objects.equals(tasks, project.tasks);
-    }
-
-    // Метод hashCode для вычисления уникального хэш-кода объекта Project
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, created, deadline, priority, status, executor, tasks);
     }
 }
-
