@@ -5,6 +5,7 @@ import org.gpoup492project2.entity.Project;
 import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.dto.ProjectDto;
 import org.gpoup492project2.entity.Comment;
+import org.gpoup492project2.entity.User;
 
 import java.util.List;
 import java.util.Map;
@@ -152,6 +153,25 @@ public class ProjectService {
     project.getComments().remove(commentToRemove);
     return "Комментарий с ID " + commentId + " удалён из проекта " + project.getTitle() + ".";
   }
+
+  //Недостающие методы
+//  public Project updateProjectTitle(String projectId, String newTitle) {
+//    Project project = projectRepository.getProjectById(projectId);
+//    if (project != null) {
+//      project.setTitle(newTitle);
+//      projectRepository.save(project);
+//      return project;
+//    }
+//    return null;
+//  }
+//
+//  public void assignExecutor(String projectId, User executor) {
+//    Project project = projectRepository.getProjectById(projectId);
+//    if (project != null) {
+//      project.setExecutor(executor);
+//      projectRepository.save(project);
+//    }
+//  }
 
   //Валидация данных проекта.
   private boolean validateProjectDto(ProjectDto projectDto) {
