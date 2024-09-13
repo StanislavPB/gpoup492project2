@@ -78,6 +78,52 @@ public class TaskService {
         return tasks.isEmpty() ? Optional.empty() : Optional.of(tasks.get(0));
     }
 
+//Недостающие методы
+//    public Task createTask(TaskDto taskDto) {
+//        Task task = new Task(taskDto.getTitle(), taskDto.getProjectId());
+//        taskRepository.save(task);
+//        return task;
+//    }
+//
+//    public String updateTask(TaskDto taskDto) {
+//        Task task = taskRepository.getTaskById(taskDto.getId());
+//        if (task != null) {
+//            task.setTitle(taskDto.getTitle());
+//            task.setDescription(taskDto.getDescription());
+//            task.setDeadline(taskDto.getDeadline());
+//            task.setPriority(taskDto.getPriority());
+//            task.setStatus(taskDto.getStatus());
+//            taskRepository.save(task);
+//            return "Задача обновлена.";
+//        }
+//        return "Задача не найдена.";
+//    }
+//
+//    public void addCommentToTask(String taskId, Comment comment) {
+//        Task task = taskRepository.getTaskById(taskId);
+//        if (task != null) {
+//            task.addComment(comment);
+//            taskRepository.save(task);
+//        }
+//    }
+//
+//    public List<Comment> getCommentsByTaskId(String taskId) {
+//        Task task = taskRepository.getTaskById(taskId);
+//        if (task != null) {
+//            return task.getComments();
+//        }
+//        return Collections.emptyList();
+//    }
+//
+//    public void deleteCommentFromTask(String commentId) {
+//        // Пример удаления комментария
+//        taskRepository.getAllTasks().forEach(task -> {
+//            task.getComments().removeIf(comment -> comment.getId().equals(commentId));
+//            taskRepository.save(task);
+//        });
+//    }
+
+
     // Метод для валидации данных задачи
     private boolean validateTaskDto(TaskDto taskDto) {
         return taskDto.getTitle() != null && !taskDto.getTitle().isEmpty() &&

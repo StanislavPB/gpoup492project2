@@ -64,9 +64,12 @@ public class Project {
     private Status status;            // Статус проекта (использует константы из класса Status)
     private User executor;            // Ответственный пользователь
     private List<Task> tasks;         // Список задач (начально пустой)
+    private List<Comment> comments;   // Поле для хранения комментариев
 
     // Конструктор класса Project
-    public Project(String id, String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status, User executor) {
+
+
+    public Project(String id, String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status, User executor, List<Task> tasks, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -75,7 +78,8 @@ public class Project {
         this.priority = priority;
         this.status = status;
         this.executor = executor;
-        this.tasks = new ArrayList<>(); // Инициализация списка задач
+        this.tasks = tasks;
+        this.comments = comments;
     }
 
     // Геттеры для доступа к полям проекта
@@ -142,6 +146,22 @@ public class Project {
 
     public void setExecutor(User executor) {
         this.executor = executor;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
     }
 
     // Метод toString для удобного вывода информации о проекте

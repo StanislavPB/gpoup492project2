@@ -5,6 +5,7 @@ import org.gpoup492project2.entity.Project;
 import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.dto.ProjectDto;
 import org.gpoup492project2.entity.Comment;
+import org.gpoup492project2.entity.User;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class ProjectService {
     }
 
     // Проверяем, существует ли проект с таким названием
-    if (projectRepository.existsProjectByTitle(projectDto.getTitle())) {
+    if (projectRepository.existsProjectByName(projectDto.getTitle())) {
       return "Проект с названием " + projectDto.getTitle() + " уже существует.";
     }
 
@@ -123,7 +124,6 @@ public class ProjectService {
       return "Задача с ID " + taskId + " не найдена в проекте " + project.getTitle() + ".";
     }
     project.getTasks().remove(taskToRemove);
-    projectRepository.updateProject(project); //это так же лишнее?
     return "Задача с ID " + taskId + " удалена из проекта " + project.getTitle() + ".";
   }
 
@@ -134,7 +134,6 @@ public class ProjectService {
       return "Проект с ID " + projectId + " не найден.";
     }
     project.getComments().add(comment);
-    projectRepository.updateProject(project); //это так же лишнее?
     return "Комментарий добавлен к проекту " + project.getTitle() + ".";
   }
 
@@ -152,9 +151,27 @@ public class ProjectService {
       return "Комментарий с ID " + commentId + " не найден в проекте " + project.getTitle() + ".";
     }
     project.getComments().remove(commentToRemove);
-    projectRepository.updateProject(project); //это так же лишнее?
     return "Комментарий с ID " + commentId + " удалён из проекта " + project.getTitle() + ".";
   }
+
+  //Недостающие методы
+//  public Project updateProjectTitle(String projectId, String newTitle) {
+//    Project project = projectRepository.getProjectById(projectId);
+//    if (project != null) {
+//      project.setTitle(newTitle);
+//      projectRepository.save(project);
+//      return project;
+//    }
+//    return null;
+//  }
+//
+//  public void assignExecutor(String projectId, User executor) {
+//    Project project = projectRepository.getProjectById(projectId);
+//    if (project != null) {
+//      project.setExecutor(executor);
+//      projectRepository.save(project);
+//    }
+//  }
 
   //Валидация данных проекта.
   private boolean validateProjectDto(ProjectDto projectDto) {

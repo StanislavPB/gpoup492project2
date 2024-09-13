@@ -6,10 +6,12 @@
 
 package org.gpoup492project2.dto;
 
+import org.gpoup492project2.entity.Comment;
 import org.gpoup492project2.entity.Task;
 import org.gpoup492project2.entity.User;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TaskDto {
 
@@ -21,10 +23,12 @@ public class TaskDto {
     private String priority;          // Приоритет задачи
     private String status;            // Статус задачи
     private User executor;            // Ответственный пользователь
+    private List<Comment> comments;   // Добавлено для хранения комментариев
 
     // Конструктор для инициализации всех полей
-    public TaskDto(String title, String description, LocalDate created, LocalDate deadline,
-                   String priority, String status, User executor) {
+
+
+    public TaskDto(String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.created = created;
@@ -32,18 +36,23 @@ public class TaskDto {
         this.priority = priority;
         this.status = status;
         this.executor = executor;
+        this.comments = comments;
     }
 
     // Преобразование DTO в объект Task
     public Task createTask() {
-        Task task=new Task(title);
-        task.setTitle(this.title);
-        task.setDescription(this.description);
-        task.setCreated(this.created);
-        task.setDeadline(this.deadline);
-        task.setPriority(this.priority);
-        task.setStatus(this.status);
-        task.setExecutor(this.executor);
+        // Создаем объект Task, используя конструктор с 9 параметрами
+        Task task = new Task(
+                null,                  // id, можно установить позже
+                this.title,
+                this.description,
+                this.created,
+                this.deadline,
+                this.priority,
+                this.status,
+                this.executor,
+                this.comments == null ? List.of() : this.comments // Если comments == null, передаем пустой список
+        );
         return task;
     }
 
