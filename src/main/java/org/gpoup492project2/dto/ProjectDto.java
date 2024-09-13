@@ -42,7 +42,7 @@ public class ProjectDto {
     // Преобразование DTO в объект Project
     public Project toProject() {
         return new Project(null, this.title, this.description, this.created, this.deadline,
-                this.priority, this.status, this.executor);
+                this.priority, this.status, this.executor,this.tasks,this);
     }
 
     // Геттеры и сеттеры для всех полей
