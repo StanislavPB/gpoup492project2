@@ -43,6 +43,18 @@ public class User {
         this.login = login;
         this.passwordHash = passwordHash;
     }
+    // Конструктор без ID
+    public User(String name,String surname, String login, Object passwordHash) {
+        this.name = name;
+        this.passwordHash = passwordHash;
+        this.login = login;
+        this.surname = surname;
+    }
+
+    public User(String username, Object passwordHash) {
+        this.name = name;
+        this.passwordHash = passwordHash;
+    }
 
     // Геттеры для всех полей, кроме пароля
     public int getId() {

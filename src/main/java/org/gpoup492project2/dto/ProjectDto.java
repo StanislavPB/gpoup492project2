@@ -29,7 +29,7 @@ public class ProjectDto {
     private List<Task> tasks;                  // Список задач
 
     // Конструктор для инициализации всех полей
-    public ProjectDto(String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status) {
+    public ProjectDto(String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status, User executor) {
         this.title = title;
         this.description = description;
         this.created = created;

@@ -55,13 +55,13 @@ public class Task {
     private String description;       // Описание задачи
     private LocalDate created;        // Дата создания задачи
     private LocalDate deadline;       // Дата выполнения задачи
-    private String priority;          // Приоритет задачи (например, высокий, средний, низкий)
-    private String status;            // Статус задачи (например, в работе, завершена, ожидает)
+    private Priority priority;          // Приоритет задачи (например, высокий, средний, низкий)
+    private Status status;            // Статус задачи (например, в работе, завершена, ожидает)
     private User executor;            // Ответственный пользователь
     private List<Comment> comments;   // Добавлено для хранения комментариев
 
     // Конструктор класса Task
-    public Task(String id, String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor, List<Comment> comments) {
+    public Task(String id, String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status, User executor, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -98,11 +98,11 @@ public class Task {
         return deadline;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -127,11 +127,11 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -148,7 +148,7 @@ public class Task {
     }
 
     // Метод для редактирования задачи
-    public void editTask(String newTitle, String newDescription, LocalDate newDeadline, String newPriority, String newStatus) {
+    public void editTask(String newTitle, String newDescription, LocalDate newDeadline, Priority newPriority, Status newStatus) {
         // Обновляем поля задачи
         this.title = newTitle;
         this.description = newDescription;

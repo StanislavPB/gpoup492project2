@@ -22,8 +22,8 @@ public class ProjectRepository {
         return projectMap.get(id);
     }
     // Метод для обновления проекта
-    public void updateProject(Project updateProject) {
-        projectMap.put(updateProject.getId(), updateProject);
+    public Project updateProject(Project updateProject) {
+        return projectMap.put(updateProject.getId(), updateProject);
     }
 
     // Метод для удаления проекта

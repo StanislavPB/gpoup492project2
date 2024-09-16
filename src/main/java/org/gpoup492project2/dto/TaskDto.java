@@ -6,9 +6,7 @@
 
 package org.gpoup492project2.dto;
 
-import org.gpoup492project2.entity.Comment;
-import org.gpoup492project2.entity.Task;
-import org.gpoup492project2.entity.User;
+import org.gpoup492project2.entity.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,15 +18,15 @@ public class TaskDto {
     private String description;       // Описание задачи
     private LocalDate created;        // Дата создания задачи
     private LocalDate deadline;       // Дата выполнения задачи
-    private String priority;          // Приоритет задачи
-    private String status;            // Статус задачи
+    private Priority priority;          // Приоритет задачи
+    private Status status;            // Статус задачи
     private User executor;            // Ответственный пользователь
     private List<Comment> comments;   // Добавлено для хранения комментариев
 
     // Конструктор для инициализации всех полей
 
 
-    public TaskDto(String title, String description, LocalDate created, LocalDate deadline, String priority, String status, User executor, List<Comment> comments) {
+    public TaskDto(String title, String description, LocalDate created, LocalDate deadline, Priority priority, Status status, User executor, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.created = created;
@@ -56,7 +54,19 @@ public class TaskDto {
         return task;
     }
 
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     // Геттеры и сеттеры для всех полей
+
+
 
     public String getTitle() {
         return title;
@@ -90,19 +100,19 @@ public class TaskDto {
         this.deadline = deadline;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -4,7 +4,6 @@ import org.gpoup492project2.Repository.UserRepository;
 import org.gpoup492project2.entity.User;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class UserService {
     private UserRepository userRepository;
@@ -15,9 +14,9 @@ public class UserService {
     }
 
     // Метод для создания пользователя
-    public User createUser(int id, String name, String surname, String login, String password) {
-        User user = new User(id, name, surname, login, password);
-        userRepository.save(user);
+    public User addUser(String name, String surname, String login, String password) {
+        User user = new User(name, surname, login, password);
+        userRepository.addUser(user);
         return user;
     }
 

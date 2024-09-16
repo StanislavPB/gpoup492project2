@@ -14,8 +14,8 @@ public class UserRepository {
     // Метод для добавления пользователя
     public String addUser(User user) {
         idCounter++; // увеличиваем счетчик пользователей
-        user.setId(Integer.parseInt(idCounter.toString())); // Устанавливаем ID в объекте User
-        userMap.put(Integer.valueOf(idCounter.toString()), user); // положили user в коллекцию
+        user.setId(idCounter); // Устанавливаем ID в объекте User
+        userMap.put(idCounter, user); // положили user в коллекцию
         return idCounter.toString(); // вернули номер пользователя
     }
 
@@ -38,8 +38,8 @@ public class UserRepository {
         return userMap;
     }
 
-    public void save(User user) {
-    }
+//    public void save(User user) {
+//    }
 
     // Метод поиска по названию
     public boolean existsUserByName(String name) {

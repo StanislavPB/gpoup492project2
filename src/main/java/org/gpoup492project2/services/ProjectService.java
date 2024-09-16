@@ -60,12 +60,13 @@ public class ProjectService {
   public String updateProject(ProjectDto projectDto) {
     // Валидируем входные данные
     if (!validateProjectDto(projectDto)) {
+      //return "Некорректные данные для обновления проекта.";
       return "Некорректные данные для обновления проекта.";
     }
 
     // Проверяем, существует ли проект с таким названием
-    if (!projectRepository.existsProjectByName(projectDto.getTitle())) {
-      return "Проект с названием " + projectDto.getTitle() + " не найден.";
+    if (!projectRepository.existsProjectById(projectDto.toProject().getId())) {
+      return "Проект с ID " + projectDto.toProject().getId() + " не найден.";
     }
 
     // Преобразуем DTO в объект Project
@@ -182,6 +183,10 @@ public class ProjectService {
             projectDto.getPriority() != null &&
             projectDto.getStatus() != null &&
             projectDto.getExecutor() != null;
+  }
+
+  public void assignExecutor(String projectIdForExecutor, User executorForProject) {
+
   }
 }
 

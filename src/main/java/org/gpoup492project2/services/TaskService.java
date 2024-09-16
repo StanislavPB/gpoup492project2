@@ -47,8 +47,11 @@ public class TaskService {
             return "Некорректные данные для обновления задачи.";
         }
         // Проверяем, существует ли задача с таким ID
-        if (!taskRepository.existsTaskById(String.valueOf(taskDto.createTask()))){
-            return "Задача с ID " + taskDto.createTask();
+//        if (!taskRepository.existsTaskById(String.valueOf(taskDto.createTask()))){
+//            return "Задача с ID " + taskDto.createTask();
+//        }
+        if (!taskRepository.existsTaskById(taskDto.getId())) {
+            return "Задача с ID " + taskDto.getId() + " не найдена.";
         }
 
         // Преобразуем DTO в объект Task
